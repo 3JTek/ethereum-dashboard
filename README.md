@@ -1,39 +1,116 @@
-# ethereum-dashboard
+# Ethereum Dashboard
 
-Ethereum dashboard repo created with NextJS and using Wagmi for wallet interaction.
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+This repository contains an Ethereum Dashboard, a modern web application built with Next.js and leveraging Wagmi for seamless wallet interactions. The application follows best practices in architecture, development workflow, and deployment to ensure scalability, maintainability, and optimal performance.
+
+## Features
+
+- Next.js App Router: Utilizing the app directory for modern React architecture.
+
+- Wagmi for Wallet Interaction: Enables seamless integration with Ethereum and other EVM-compatible blockchains.
+
+- ShadCN UI + Tailwind CSS: A robust, customizable UI framework.
+
+- Strict TypeScript Integration: Ensures type safety and improved developer experience.
+
+- CI/CD with GitHub Actions and Vercel: Automates linting, testing, and deployment.
+
+- Code Quality Enforcement: Husky hooks for pre-push checks.
+
+- Analytics via Vercel: Provides insights into user interactions and performance.
 
 ## Getting Started
 
-First, run the development server:
+To set up the development environment, follow these steps:
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+    yarn install
+    yarn dev
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open http://localhost:3000 in your browser to view the application.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Architecture
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+This repository adheres to a Domain-Driven Design (DDD) approach, ensuring a modular and scalable structure:
 
-## Learn More
+features/ – Contains domain-specific functionalities.
 
-To learn more about Next.js, take a look at the following resources:
+shared/ – Houses reusable components and utilities.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+app/ – Manages routing and global application logic.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Routing is handled via Next.js' App Router, providing enhanced flexibility and performance optimizations.
 
-## Deploy on Vercel
+## Wallet Integration (Wagmi)
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+The application utilizes Wagmi, a powerful React library for interacting with Ethereum wallets and RPC nodes. It provides:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- A React provider for seamless state management.
+
+- Hooks for reading and writing data on supported chains.
+
+- Support for multiple wallet connectors, including MetaMask, WalletConnect, and Coinbase Wallet.
+
+## Design System
+
+The UI is built using ShadCN UI, a component-based design system that enhances development speed and consistency. Styling is managed via Tailwind CSS, a utility-first CSS framework optimized for rapid UI development.
+
+## TypeScript, Linting & Formatting
+
+To ensure high-quality and maintainable code, the following tools are integrated:
+
+- TypeScript: Provides static type checking to prevent runtime errors.
+
+- ESLint: Enforces coding standards and identifies potential issues.
+
+- Prettier: Ensures consistent formatting across the codebase.
+
+## Testing
+
+Testing is a critical aspect of this application, with the following tools used:
+
+- Vitest: A fast test runner that provides Jest-compatible APIs.
+
+- React Testing Library: Focuses on testing components from the user's perspective.
+
+- Coverage for critical components: Ensures core functionalities are robust and reliable.
+
+## Pre-Push Hooks (Husky)
+
+Husky is configured to run pre-push hooks, enforcing:
+
+- Linting with ESLint.
+
+- Code formatting with Prettier.
+
+- Unit and component tests before pushing to GitHub.
+
+This ensures that only clean and tested code is committed.
+
+## Continuous Integration & Deployment
+
+GitHub Actions
+
+A CI pipeline is set up using GitHub Actions to:
+
+- Run linting and tests on every push.
+
+- Prevent merging of non-compliant code.
+
+## Vercel Deployment
+
+This repository is integrated with Vercel for automated deployments:
+
+- Every push to main triggers a new deployment.
+
+- Previews are generated for pull requests.
+
+- Performance optimizations are applied for production builds.
+
+## Analytics
+
+User interactions and performance metrics are monitored via Vercel Analytics, providing insights into:
+
+- Page views and user activity.
+
+- Load times and performance bottlenecks.
+
+- Error tracking for debugging.
