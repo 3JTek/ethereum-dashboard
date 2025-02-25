@@ -1,5 +1,7 @@
 # Ethereum Dashboard
 
+[Live Site](https://ethereum-dashboard-seven.vercel.app/ "Live Site")
+
 This repository contains an Ethereum Dashboard, a modern web application built with Next.js and leveraging Wagmi for seamless wallet interactions. The application follows best practices in architecture, development workflow, and deployment to ensure scalability, maintainability, and optimal performance.
 
 ## Features
