@@ -7,7 +7,9 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "test": "vitest"
+    "test": "vitest watch",
+    "test:run": "vitest run",
+    "prepare": "husky"
   },
   "dependencies": {
     "@radix-ui/react-alert-dialog": "^1.1.6",
@@ -43,6 +45,7 @@
     "eslint-config-prettier": "^10.0.1",
     "eslint-import-resolver-typescript": "^3.8.3",
     "eslint-plugin-simple-import-sort": "^12.1.1",
+    "husky": "^9.1.7",
     "jsdom": "^26.0.0",
     "msw": "^2.7.2",
     "postcss": "^8",
