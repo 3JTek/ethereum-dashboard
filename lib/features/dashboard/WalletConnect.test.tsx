@@ -1,4 +1,3 @@
-import { fakeWalletA } from "@/lib/shared/wallet/mocks/walletMock";
 import { render, screen } from "@testing-library/react";
 import { userEvent } from "@testing-library/user-event";
 import { beforeAll, describe, expect, it, vi } from "vitest";
@@ -12,6 +11,8 @@ import {
   useEnsName,
   UseEnsNameReturnType,
 } from "wagmi";
+
+import { fakeWalletA } from "@/lib/shared/wallet/mocks/walletMock";
 
 import WalletConnect from "./WalletConnect";
 

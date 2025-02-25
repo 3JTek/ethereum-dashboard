@@ -1,4 +1,4 @@
-import { TokenInfo, tokens, TokenSymbol } from "@shared/contracts/tokenAddresses";
+import { TokenInfo, tokens } from "@shared/contracts/tokenAddresses";
 import { render, screen } from "@testing-library/react";
 import { beforeAll, describe, expect, it, vi } from "vitest";
 import { useAccount, UseAccountReturnType, useBalance, UseBalanceReturnType } from "wagmi";
