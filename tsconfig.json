@@ -18,9 +18,16 @@
         "name": "next"
       }
     ],
+    "baseUrl": ".",
     "paths": {
-      "@/*": ["./*"]
-    }
+      "@/*": ["./*"],
+      "@lib/*": ["./lib/*"],
+      "@shared/*": ["./lib/shared/*"],
+      "@features": ["./lib/features/*"],
+      "@design-system": ["./lib/shared/components/shadcn-ui/*"],
+      "@custom-components": ["./lib/shared/components/custom/*"]
+    },
+    "types": ["@testing-library/jest-dom", "vitest/globals"]
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
   "exclude": ["node_modules"]

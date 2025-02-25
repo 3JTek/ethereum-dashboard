@@ -1,14 +1,16 @@
-import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
+import Container from "@lib/shared/components/custom/Container";
+import ApiClientProvider from "@shared/api/ApiClientProvider";
+import ThemeProvider from "@shared/style/ThemeProvider";
+import WalletProvider from "@shared/wallet/WalletProvider";
+import type { Metadata } from "next";
+import { Space_Grotesk } from "next/font/google";
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+import Navbar from "@/lib/features/navigation/Navbar";
+
+const spaceGroteskSans = Space_Grotesk({
+  variable: "--font-space-grotesk",
   subsets: ["latin"],
 });
 
@@ -24,10 +26,17 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        {children}
+      <body className={`${spaceGroteskSans.variable} antialiased`}>
+        <div className=" size-full min-h-screen overflow-x-hidden">
+          <ThemeProvider>
+            <WalletProvider>
+              <ApiClientProvider>
+                <Navbar />
+                <Container>{children}</Container>
+              </ApiClientProvider>
+            </WalletProvider>
+          </ThemeProvider>
+        </div>
       </body>
     </html>
   );
