@@ -4,6 +4,7 @@ import Container from "@lib/shared/components/custom/Container";
 import ApiClientProvider from "@shared/api/ApiClientProvider";
 import ThemeProvider from "@shared/style/ThemeProvider";
 import WalletProvider from "@shared/wallet/WalletProvider";
+import { Analytics } from "@vercel/analytics/react";
 import type { Metadata } from "next";
 import { Space_Grotesk } from "next/font/google";
 
@@ -37,6 +38,7 @@ export default function RootLayout({
             </WalletProvider>
           </ThemeProvider>
         </div>
+        <Analytics />
       </body>
     </html>
   );
