@@ -1,9 +1,10 @@
-import { TokenInfo, tokens } from "@shared/contracts/tokenAddresses";
 import { render, screen } from "@testing-library/react";
 import { beforeAll, describe, expect, it, vi } from "vitest";
 import { useAccount, UseAccountReturnType, useBalance, UseBalanceReturnType } from "wagmi";
 
-import { fakeWalletA } from "../../shared/wallet/mocks/walletMock";
+import { TokenInfo, tokens } from "@/lib/shared/contracts/tokens";
+import { fakeWalletA } from "@/lib/shared/wallet/mocks/walletMock";
+
 import BalanceItem from "./BalanceItem";
 
 vi.mock("wagmi", () => ({

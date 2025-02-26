@@ -1,9 +1,10 @@
 "use client";
 
 import { Skeleton } from "@shared/components/shadcn-ui/skeleton";
-import { TokenInfo, TokenSymbol } from "@shared/contracts/tokenAddresses";
 import { formatUnits } from "viem";
 import { useAccount, useBalance } from "wagmi";
+
+import { TokenInfo, TokenSymbol } from "@/lib/shared/contracts/tokens";
 
 const BalanceItem = ({ token }: { token: TokenInfo }) => {
   const { address } = useAccount();

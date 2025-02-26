@@ -1,6 +1,6 @@
 "use client";
 
-import { tokens } from "@shared/contracts/tokenAddresses";
+import { tokens } from "@/lib/shared/contracts/tokens";
 
 import BalanceItem from "./BalanceItem";
 

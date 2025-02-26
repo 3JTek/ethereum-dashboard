@@ -1,14 +1,14 @@
 import "./globals.css";
 
 import Container from "@lib/shared/components/custom/Container";
-import ApiClientProvider from "@shared/api/ApiClientProvider";
-import ThemeProvider from "@shared/style/ThemeProvider";
-import WalletProvider from "@shared/wallet/WalletProvider";
 import { Analytics } from "@vercel/analytics/react";
 import type { Metadata } from "next";
 import { Space_Grotesk } from "next/font/google";
 
-import Navbar from "@/lib/features/navigation/Navbar";
+import Navbar from "@/lib/features/navigation/components/Navbar";
+import ApiClientProvider from "@/lib/shared/api/providers/ApiClientProvider";
+import ThemeProvider from "@/lib/shared/style/providers/ThemeProvider";
+import WalletProvider from "@/lib/shared/wallet/providers/WalletProvider";
 
 const spaceGroteskSans = Space_Grotesk({
   variable: "--font-space-grotesk",
@@ -28,7 +28,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${spaceGroteskSans.variable} antialiased`}>
-        <div className=" size-full min-h-screen overflow-x-hidden">
+        <div className=" size-full min-h-screen overflow-x-hidden flex flex-col">
           <ThemeProvider>
             <WalletProvider>
               <ApiClientProvider>
