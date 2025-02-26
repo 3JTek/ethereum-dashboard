@@ -1,3 +1,5 @@
+import apiClient from "./serverApiClient";
+
 const baseUrl = "https://api.coingecko.com/api/v3/simple";
 
 interface TokenPriceResponse {
@@ -7,8 +9,7 @@ interface TokenPriceResponse {
 }
 
 const getTokenPrice = async (tokenName: string, currency: string = "usd"): Promise<number> => {
-  const response = await fetch(`${baseUrl}/price?ids=${tokenName}&vs_currencies=${currency}`);
-  const data: TokenPriceResponse = await response.json();
+  const data = await apiClient.get<TokenPriceResponse>(`${baseUrl}/price?ids=${tokenName}&vs_currencies=${currency}`);
 
   return data[tokenName][currency];
 };
