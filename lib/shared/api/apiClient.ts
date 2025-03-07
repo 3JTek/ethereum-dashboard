@@ -34,6 +34,9 @@ const sendRequest = async <T>(url: string, { method, body, headers }: RequestPar
   if (response.ok) {
     return response.json();
   } else {
+    console.log(response);
+    console.log(await response.json());
+
     throw new Error(response.statusText);
   }
 };

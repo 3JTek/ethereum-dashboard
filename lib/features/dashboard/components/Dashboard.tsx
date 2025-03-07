@@ -1,11 +1,11 @@
 import BalanceList from "./BalanceList";
 import EthereumPrice from "./EthPrice";
-import Header from "./Header";
+import Header from "./Title";
 import WalletConnect from "./WalletConnect";
 
 const Dashboard = () => {
   return (
-    <div className="flex flex-col gap-10">
+    <div className="flex  flex-1 flex-col gap-10">
       <Header />
       <WalletConnect />
       <EthereumPrice />

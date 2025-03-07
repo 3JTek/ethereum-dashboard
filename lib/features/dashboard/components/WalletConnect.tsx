@@ -2,6 +2,7 @@
 
 import { useAccount, useDisconnect, useEnsName } from "wagmi";
 
+import Header from "@/lib/shared/components/custom/Header";
 import WalletAbbreviatedAddress from "@/lib/shared/components/custom/WalletAbbreviatedAddress";
 import { Button } from "@/lib/shared/components/shadcn-ui/button";
 
@@ -15,7 +16,7 @@ const WalletConnect = () => {
   return (
     <div>
       <div className="mb-4">
-        <h2 className="text-[22px] font-bold leading-tight tracking-[-0.015em]">Your Wallet</h2>
+        <Header type="h2">Your Wallet</Header>
       </div>
       <div className="flex flex-1 flex-col md:flex-row items-center justify-between gap-4 rounded-xl border border-[#325567] dark:bg-[#111c22] p-5 @[480px]:flex-row @[480px]:items-center">
         {address ? (

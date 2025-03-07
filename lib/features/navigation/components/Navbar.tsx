@@ -11,6 +11,12 @@ const Navbar = () => {
       <Logo />
       <div className="flex flex-1 justify-end gap-8">
         <div className="flex items-center gap-9">
+          <NavItem name="dashboard" href={"/"} />
+        </div>
+        <div className="flex items-center gap-9">
+          <NavItem name="swap" href={"/swap"} />
+        </div>
+        <div className="flex items-center gap-9">
           <NavItem name="mint" href={"/mint"} />
         </div>
         <div>

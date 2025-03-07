@@ -1,4 +1,4 @@
-type TokenAddress = `0x${string}`;
+export type TokenAddress = `0x${string}`;
 
 enum TokenName {
   ETHER = "ether",
@@ -24,7 +24,7 @@ export type TokenInfo = {
 };
 
 export const tokens = {
-  ether: { symbol: TokenSymbol.ETHER, address: "0x" },
+  ether: { symbol: TokenSymbol.ETHER, address: "0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee" },
   fit: { symbol: TokenSymbol.FIT, address: "0x9B01637302B6Adfc2C82678e2A8D680CFF6337B7" },
   immutable: { symbol: TokenSymbol.IMMUTABLE, address: "0xF57e7e7C23978C3cAEC3C3548E3D615c346e79fF" },
   polygon: { symbol: TokenSymbol.POLYGON, address: "0x7D1AfA7B718fb893dB30A3aBc0Cfc608AaCfeBB0" },

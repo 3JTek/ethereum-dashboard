@@ -21,6 +21,7 @@ const eslintConfig = [
       "simple-import-sort/imports": "error",
       "simple-import-sort/exports": "error",
       "import/newline-after-import": "error",
+      "@typescript-eslint/no-unused-vars": "warn",
     },
     settings: {
       "import/resolver": {
