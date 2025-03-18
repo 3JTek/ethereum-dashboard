@@ -1,10 +1,11 @@
+import { formatUnits } from "viem";
 import { useAccount, useBalance } from "wagmi";
 
 import { TokenInfo, TokenSymbol } from "../../contracts/tokens";
 
 const staleTime = 10 * 60 * 1000; //10 minutes before data considered stale
 
-const useFetchBalance = (token: TokenInfo) => {
+const useBalanceOf = (token?: TokenInfo) => {
   const { address } = useAccount();
 
   const shouldFetch = !!address && !!token;
@@ -17,7 +18,9 @@ const useFetchBalance = (token: TokenInfo) => {
     query: { enabled: shouldFetch, staleTime },
   });
 
-  return { data, isPending, error };
+  const balance = data ? formatUnits(data.value, data.decimals) : undefined;
+
+  return { balance, data, isPending, error };
 };
 
-export default useFetchBalance;
+export default useBalanceOf;
