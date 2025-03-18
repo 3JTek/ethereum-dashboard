@@ -1,16 +1,22 @@
-import { TokenAddress } from "@/lib/shared/contracts/tokens";
+import { formatUnits, parseUnits } from "viem";
+
+import { TokenInfo } from "@/lib/shared/contracts/tokens";
 
 import apiClient from "../../apiClient";
 
 export const getQuote = async (
-  srcToken: TokenAddress,
-  dstToken: TokenAddress,
+  fromToken: TokenInfo,
+  toToken: TokenInfo,
   amount: number,
   includeGas = true
-): Promise<{ dstAmount: string }> => {
+): Promise<{ estimatedAmount: string }> => {
+  const amountInBaseUnits = parseUnits(amount.toString(), fromToken.decimals).toString();
+
   const response = await apiClient.get<{ data: { dstAmount: string } }>(
-    `/api/swap/quote?srcToken=${srcToken}&dstToken=${dstToken}&amount=${amount}&includeGas=${includeGas}`
+    `/api/swap/quote?srcToken=${fromToken.address}&dstToken=${toToken.address}&amount=${amountInBaseUnits}&includeGas=${includeGas}`
   );
 
-  return response.data;
+  const estimatedAmount = formatUnits(BigInt(response.data.dstAmount), toToken.decimals);
+
+  return { estimatedAmount };
 };

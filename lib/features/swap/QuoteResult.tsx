@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { useEffect, useState } from "react";
+import { useDebounce } from "@uidotdev/usehooks";
 
 import backendApi from "@/lib/shared/api/client/backend-api";
 import Header from "@/lib/shared/components/custom/Header";
@@ -13,43 +13,22 @@ type Props = {
 };
 
 const QuoteResult = ({ fromToken, toToken, amount }: Props) => {
-  const [fetchQuoteTimeout, setFetchQuoteTimeout] = useState<ReturnType<typeof setTimeout> | undefined>(undefined);
+  const debouncedAmount = useDebounce(amount, 1000);
 
   const query = useQuery({
-    queryKey: ["quote", fromToken, toToken, amount],
-    // eslint-disable-next-line @typescript-eslint/no-non-null-asserted-optional-chain
-    queryFn: () => backendApi.getQuote(fromToken?.address!, toToken?.address!, amount!),
-    enabled: () => !!fromToken && !!toToken && !!amount && !fetchQuoteTimeout,
+    queryKey: ["quote", { fromToken, toToken, debouncedAmount }],
+    queryFn: () => backendApi.getQuote(fromToken!, toToken!, debouncedAmount!),
+    enabled: () => !!fromToken && !!toToken && !!debouncedAmount,
   });
 
-  useEffect(
-    function debounceFetchQuote() {
-      clearTimeout(fetchQuoteTimeout);
-
-      if (!amount) {
-        setFetchQuoteTimeout(undefined);
-      } else {
-        const timeout = setTimeout(() => setFetchQuoteTimeout(undefined), 500);
-
-        setFetchQuoteTimeout(timeout);
-      }
-
-      return () => {
-        clearTimeout(fetchQuoteTimeout);
-      };
-    },
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    [amount]
-  );
-
-  console.log(query, fetchQuoteTimeout);
+  const isLoadingSkeletonShown = debouncedAmount !== amount || query.isLoading;
 
   return (
     <div>
       <div className="mb-2">
         <Header type="h3">Estimated amount</Header>
       </div>
-      {fetchQuoteTimeout || query.isLoading ? <Skeleton className="h-full w-[25px]" /> : <p>{query.data?.dstAmount || ""}</p>}
+      {isLoadingSkeletonShown ? <Skeleton className="h-full w-[25px]" /> : <p>{query.data?.estimatedAmount || ""}</p>}
     </div>
   );
 };
