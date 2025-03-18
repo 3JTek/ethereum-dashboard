@@ -27,7 +27,7 @@ const AmountSelection = ({ fromToken, toToken, amount, setAmount }: Props) => {
 
   const isDisabled = useMemo(() => !fromToken || !toToken, [fromToken, toToken]);
 
-  const inputAmount = amount ? String(amount) : "";
+  const inputAmount = amount ?? "";
 
   return (
     <div>
