@@ -30,7 +30,7 @@ const FromTokenSelection = ({ token, setToken }: Props) => {
       <Header type="h3">From</Header>
 
       <Select value={token?.symbol} onValueChange={handleTokenChange}>
-        <SelectTrigger>
+        <SelectTrigger aria-label="from-token-select">
           <SelectValue placeholder="Select a token to sell" />
         </SelectTrigger>
         <SelectContent>
