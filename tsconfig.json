@@ -22,10 +22,12 @@
     "paths": {
       "@/*": ["./*"],
       "@lib/*": ["./lib/*"],
-      "@shared/*": ["./lib/shared/*"],
-      "@features": ["./lib/features/*"],
-      "@design-system": ["./lib/shared/components/shadcn-ui/*"],
-      "@custom-components": ["./lib/shared/components/custom/*"]
+      "@client/*": ["./lib/client/*"],
+      "@features/*": ["lib/client/features/*"],
+      "@design-system/*": ["./lib/client/shared/components/shadcn-ui/*"],
+      "@custom-components/*": ["./lib/client/shared/components/custom/*"],
+      "@server/*": ["./lib/server/*"],
+      "@common/*": ["lib/common/*"]
     },
     "types": ["@testing-library/jest-dom", "vitest/globals"]
   },

@@ -1,9 +1,10 @@
-import oneInchApi from "@lib/server/api/one-inch";
 import { NextRequest, NextResponse } from "next/server";
 
 import { ApiError } from "@/lib/common/utils/Error";
+import oneInchApi from "@/lib/server/api/one-inch";
+import { OneInchGetSwapDataResponse } from "@/lib/server/api/one-inch/getSwapData";
 
-export async function GET(req: NextRequest): Promise<NextResponse<{ data: { dstAmount: string } } | { error: string }>> {
+export async function GET(req: NextRequest): Promise<NextResponse<{ data: OneInchGetSwapDataResponse } | { error: string }>> {
   try {
     const params = req.nextUrl.searchParams;
 
@@ -11,14 +12,15 @@ export async function GET(req: NextRequest): Promise<NextResponse<{ data: { dstA
     const dstToken = params.get("dstToken");
     const amount = params.get("amount");
     const amountNb = Number(amount);
+    const wallet = params.get("wallet");
 
-    if (!srcToken || !dstToken || !amount || Number.isNaN(amountNb)) {
+    if (!srcToken || !dstToken || !amount || Number.isNaN(amountNb) || !wallet) {
       return NextResponse.json({ error: "missing parameters" }, { status: 400 });
     }
 
-    const response = await oneInchApi.getQuote(srcToken, dstToken, amountNb);
+    const response = await oneInchApi.getSwapData({ srcToken, dstToken, amount: amountNb, wallet });
 
-    return NextResponse.json({ data: { dstAmount: response.dstAmount } });
+    return NextResponse.json({ data: response });
   } catch (error) {
     let errorMessage;
     let errorStatus;
