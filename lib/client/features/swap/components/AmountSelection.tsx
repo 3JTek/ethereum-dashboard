@@ -7,7 +7,6 @@ import Header from "@/lib/client/shared/components/custom/Header";
 import TokenBalance from "@/lib/client/shared/components/custom/TokenBalance";
 import { Button } from "@/lib/client/shared/components/shadcn-ui/button";
 import { Input } from "@/lib/client/shared/components/shadcn-ui/input";
-import formatTokenValue from "@/lib/client/shared/utils/formatTokenValue";
 import useBalanceOf from "@/lib/client/shared/wallet/hooks/useBalanceOf";
 import { TokenInfo } from "@/lib/common/contracts/tokens";
 
@@ -39,7 +38,7 @@ const AmountSelection = ({ fromToken, toToken, amount, setAmount }: Props) => {
 
   const isDisabled = useMemo(() => !fromToken || !toToken, [fromToken, toToken]);
 
-  const inputAmount = amount ? formatTokenValue(amount) : "";
+  const inputAmount = amount ?? "";
 
   return (
     <div>

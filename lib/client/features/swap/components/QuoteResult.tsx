@@ -22,20 +22,21 @@ const QuoteResult = ({ fromToken, toToken, amount, quote, setQuote }: Props) => 
   const query = useQuery({
     queryKey: ["quote", { fromToken, toToken, debouncedAmount }],
     queryFn: () => backendApi.getQuote(fromToken!, toToken!, debouncedAmount!),
-    enabled: () => !!fromToken && !!toToken && !!debouncedAmount,
+    enabled: () => !!fromToken && !!toToken && !!debouncedAmount && !!amount,
   });
 
   useEffect(
     function updateQuoteValue() {
-      if (query.data) {
+      if (isDebounceComplete && query.isSuccess) {
         setQuote(Number(query.data.estimatedAmount));
       }
     },
-    // eslint-disable-next-line react-hooks/exhaustive-deps
     [query]
   );
 
-  const isLoadingSkeletonShown = debouncedAmount !== amount || query.isLoading;
+  const isDebounceComplete = debouncedAmount === amount;
+
+  const isLoading = amount && (!isDebounceComplete || query.isLoading);
 
   const result = quote ? `${formatTokenValue(quote)} ${toToken?.symbol}` : "";
 
@@ -44,7 +45,7 @@ const QuoteResult = ({ fromToken, toToken, amount, quote, setQuote }: Props) => 
       <div className="mb-2">
         <Header type="h3">You will receive</Header>
       </div>
-      {isLoadingSkeletonShown ? <Skeleton className="h-full w-[25px]" /> : <p>{result}</p>}
+      <div className="h-6">{isLoading ? <Skeleton className="h-full w-[25px]" /> : <p>{result}</p>}</div>
     </div>
   );
 };
