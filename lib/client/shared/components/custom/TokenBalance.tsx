@@ -1,6 +1,6 @@
 import useBalanceOf from "@lib/client/shared/wallet/hooks/useBalanceOf";
 
-import formatTokenValue from "@/lib/client/shared/utils/formatTokenValue";
+import { formatNumberForDisplay, roundTokenBalance } from "@/lib/client/shared/utils/formatTokenValue";
 import { TokenInfo } from "@/lib/common/contracts/tokens";
 
 import { Skeleton } from "../shadcn-ui/skeleton";
@@ -21,7 +21,7 @@ const TokenBalance = ({ token }: Props) => {
   }
 
   if (balance) {
-    const balanceToDisplay = formatTokenValue(Number(balance));
+    const balanceToDisplay = balance ? formatNumberForDisplay(roundTokenBalance(Number(balance))) : "";
 
     return <p className="text-sm font-normal leading -normal">{balanceToDisplay}</p>;
   }

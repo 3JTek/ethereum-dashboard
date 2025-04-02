@@ -7,6 +7,7 @@ import Header from "@/lib/client/shared/components/custom/Header";
 import TokenBalance from "@/lib/client/shared/components/custom/TokenBalance";
 import { Button } from "@/lib/client/shared/components/shadcn-ui/button";
 import { Input } from "@/lib/client/shared/components/shadcn-ui/input";
+import { roundTokenBalance } from "@/lib/client/shared/utils/formatTokenValue";
 import useBalanceOf from "@/lib/client/shared/wallet/hooks/useBalanceOf";
 
 import { useFormContext } from "../hooks/useFormContext";
@@ -38,7 +39,7 @@ const AmountSelection = () => {
 
   const isDisabled = !state.fromToken || !state.toToken;
 
-  const inputAmount = state.amount ?? "";
+  const inputAmount = state.amount ? roundTokenBalance(state.amount) : "";
 
   return (
     <div>

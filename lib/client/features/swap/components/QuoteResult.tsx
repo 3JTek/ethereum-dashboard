@@ -5,7 +5,7 @@ import { useEffect } from "react";
 import backendApi from "@/lib/client/shared/api/backend-api";
 import Header from "@/lib/client/shared/components/custom/Header";
 import { Skeleton } from "@/lib/client/shared/components/shadcn-ui/skeleton";
-import formatTokenValue from "@/lib/client/shared/utils/formatTokenValue";
+import { formatNumberForDisplay, roundTokenBalance } from "@/lib/client/shared/utils/formatTokenValue";
 
 import { useFormContext } from "../hooks/useFormContext";
 import { ActionType } from "../reducer/formReducer";
@@ -35,7 +35,7 @@ const QuoteResult = () => {
 
   const isLoading = amount && (!isDebounceComplete || query.isLoading);
 
-  const result = quote ? `${formatTokenValue(quote)} ${toToken?.symbol}` : "";
+  const result = quote ? `${formatNumberForDisplay(roundTokenBalance(quote))} ${toToken?.symbol}` : "";
 
   return (
     <div>

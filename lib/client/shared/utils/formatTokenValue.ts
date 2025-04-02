@@ -1,9 +1,14 @@
 import Decimal from "decimal.js";
+import { formatUnits } from "viem";
 
-const CURRENCY_FORMAT = "en-US";
+const DEFAULT_FORMAT_NUMBER = "en-US";
 const MAX_DECIMALS = 4;
 
-function formatTokenValue(balance: number): string {
+function convertTokenUnits(value: bigint, decimals: number): string {
+  return formatUnits(value, decimals);
+}
+
+function roundTokenBalance(balance: number): number {
   const decimal = new Decimal(balance);
 
   // Determine the number of decimal places to keep
@@ -12,10 +17,7 @@ function formatTokenValue(balance: number): string {
   // Round the number to the desired decimal places
   const roundedValue = decimal.toFixed(decimalPlaces, Decimal.ROUND_DOWN);
 
-  // Format the number with commas for thousands
-  return new Intl.NumberFormat(CURRENCY_FORMAT, {
-    maximumFractionDigits: decimalPlaces,
-  }).format(Number(roundedValue));
+  return Number(roundedValue);
 }
 
 function getDecimalPlaces(decimal: Decimal) {
@@ -38,4 +40,11 @@ function findFirstNonZeroDecimalIndex(decimal: Decimal): number {
     .findIndex((digit) => digit !== "0");
 }
 
-export default formatTokenValue;
+function formatNumberForDisplay(value: number, format = DEFAULT_FORMAT_NUMBER): string {
+  // Format the number with commas for thousands
+  return new Intl.NumberFormat(format, {
+    maximumFractionDigits: 100,
+  }).format(Number(value));
+}
+
+export { convertTokenUnits, formatNumberForDisplay, roundTokenBalance };
