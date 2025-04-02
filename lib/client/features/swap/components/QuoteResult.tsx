@@ -6,17 +6,14 @@ import backendApi from "@/lib/client/shared/api/backend-api";
 import Header from "@/lib/client/shared/components/custom/Header";
 import { Skeleton } from "@/lib/client/shared/components/shadcn-ui/skeleton";
 import formatTokenValue from "@/lib/client/shared/utils/formatTokenValue";
-import { TokenInfo } from "@/lib/common/contracts/tokens";
 
-type Props = {
-  fromToken: TokenInfo | undefined;
-  toToken: TokenInfo | undefined;
-  amount: number | undefined;
-  quote: number | undefined;
-  setQuote: (quote: number) => void;
-};
+import { useFormContext } from "../hooks/useFormContext";
+import { ActionType } from "../reducer/formReducer";
 
-const QuoteResult = ({ fromToken, toToken, amount, quote, setQuote }: Props) => {
+const QuoteResult = () => {
+  const { state, dispatch } = useFormContext();
+  const { fromToken, toToken, amount, quote } = state;
+
   const debouncedAmount = useDebounce(amount, 1000);
 
   const query = useQuery({
@@ -28,10 +25,10 @@ const QuoteResult = ({ fromToken, toToken, amount, quote, setQuote }: Props) => 
   useEffect(
     function updateQuoteValue() {
       if (isDebounceComplete && query.isSuccess) {
-        setQuote(Number(query.data.estimatedAmount));
+        dispatch({ type: ActionType.SET_QUOTE, payload: Number(query.data.estimatedAmount) });
       }
     },
-    [query]
+    [query.isSuccess]
   );
 
   const isDebounceComplete = debouncedAmount === amount;

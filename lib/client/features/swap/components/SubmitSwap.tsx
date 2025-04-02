@@ -2,18 +2,18 @@ import React from "react";
 
 import { Button } from "@/lib/client/shared/components/shadcn-ui/button";
 
-type Props = {
-  quote: number | undefined;
-};
+import { useFormContext } from "../hooks/useFormContext";
 
-const SubmitSwap = ({ quote }: Props) => {
+const SubmitSwap = () => {
+  const { state } = useFormContext();
+
   const handleSwapClick = () => {
     console.log("Swap clicked");
   };
 
   return (
     <div>
-      <Button disabled={!quote} onClick={handleSwapClick}>
+      <Button disabled={!state.quote} onClick={handleSwapClick}>
         Swap
       </Button>
     </div>

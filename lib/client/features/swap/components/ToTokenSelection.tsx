@@ -10,28 +10,26 @@ import {
 } from "@lib/client/shared/components/shadcn-ui/select";
 
 import tokensEnabled from "@/lib/common/config/tokensEnabled";
-import { TokenInfo } from "@/lib/common/contracts/tokens";
 
-type Props = {
-  fromToken: TokenInfo | undefined;
-  toToken: TokenInfo | undefined;
-  setToToken: (token: TokenInfo | undefined) => void;
-};
+import { useFormContext } from "../hooks/useFormContext";
+import { ActionType } from "../reducer/formReducer";
 
-const DestinationTokenSelection = ({ fromToken, toToken, setToToken }: Props) => {
-  const toTokenList = tokensEnabled.filter((token) => token.symbol !== fromToken?.symbol);
+const DestinationTokenSelection = () => {
+  const { state, dispatch } = useFormContext();
+
+  const toTokenList = tokensEnabled.filter((token) => token.symbol !== state.fromToken?.symbol);
 
   const handleTokenChange = (value: string) => {
     const token = Object.values(toTokenList).find((token) => token.symbol === value);
 
-    setToToken(token);
+    dispatch({ type: ActionType.SET_TO_TOKEN, payload: token });
   };
 
   return (
     <div className="flex flex-col gap-6">
       <Header type="h3">To</Header>
 
-      <Select disabled={!fromToken} value={toToken?.symbol} onValueChange={handleTokenChange}>
+      <Select disabled={!state.fromToken} value={state.toToken?.symbol} onValueChange={handleTokenChange}>
         <SelectTrigger>
           <SelectValue placeholder="Select a token to buy" />
         </SelectTrigger>

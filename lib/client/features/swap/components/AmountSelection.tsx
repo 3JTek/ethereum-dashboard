@@ -1,44 +1,44 @@
 "use client";
 
 import { RotateCw } from "lucide-react";
-import React, { useMemo } from "react";
+import React from "react";
 
 import Header from "@/lib/client/shared/components/custom/Header";
 import TokenBalance from "@/lib/client/shared/components/custom/TokenBalance";
 import { Button } from "@/lib/client/shared/components/shadcn-ui/button";
 import { Input } from "@/lib/client/shared/components/shadcn-ui/input";
 import useBalanceOf from "@/lib/client/shared/wallet/hooks/useBalanceOf";
-import { TokenInfo } from "@/lib/common/contracts/tokens";
 
-type Props = {
-  fromToken: TokenInfo | undefined;
-  toToken: TokenInfo | undefined;
-  amount: number | undefined;
-  setAmount: (amount: number | undefined) => void;
-};
+import { useFormContext } from "../hooks/useFormContext";
+import { ActionType } from "../reducer/formReducer";
 
-const AmountSelection = ({ fromToken, toToken, amount, setAmount }: Props) => {
-  const { balance } = useBalanceOf(fromToken);
+const AmountSelection = () => {
+  const { state, dispatch } = useFormContext();
+  const { balance } = useBalanceOf(state.fromToken);
 
   const handleAmountChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newValue = e.target.value;
 
+    let payload: number | undefined;
+
     if (newValue === "") {
-      setAmount(undefined);
+      payload = undefined;
     } else {
-      setAmount(parseFloat(newValue));
+      payload = parseFloat(newValue);
     }
+
+    dispatch({ type: ActionType.SET_AMOUNT, payload });
   };
 
   const handleClickMaxAmount = () => {
     if (!balance) return;
 
-    setAmount(parseFloat(balance));
+    dispatch({ type: ActionType.SET_AMOUNT, payload: parseFloat(balance) });
   };
 
-  const isDisabled = useMemo(() => !fromToken || !toToken, [fromToken, toToken]);
+  const isDisabled = !state.fromToken || !state.toToken;
 
-  const inputAmount = amount ?? "";
+  const inputAmount = state.amount ?? "";
 
   return (
     <div>
@@ -50,7 +50,7 @@ const AmountSelection = ({ fromToken, toToken, amount, setAmount }: Props) => {
           <Input disabled={isDisabled} type="number" placeholder="0" onChange={handleAmountChange} value={inputAmount} />
         </div>
         <div>
-          {fromToken && (
+          {state.fromToken && (
             <div className="flex items-center gap-2">
               <Button disabled={isDisabled} variant="outline" onClick={handleClickMaxAmount}>
                 <RotateCw></RotateCw>
@@ -59,7 +59,7 @@ const AmountSelection = ({ fromToken, toToken, amount, setAmount }: Props) => {
                 <p>Use max amount</p>
                 <div className="flex items-center gap-2 text-muted-foreground">
                   <p>Balance:</p>
-                  <TokenBalance token={fromToken} />
+                  <TokenBalance token={state.fromToken} />
                 </div>
               </div>
             </div>

@@ -1,5 +1,4 @@
 "use client";
-
 import Header from "@lib/client/shared/components/custom/Header";
 import {
   Select,
@@ -12,25 +11,25 @@ import {
 } from "@lib/client/shared/components/shadcn-ui/select";
 
 import tokensEnabled from "@/lib/common/config/tokensEnabled";
-import { TokenInfo, tokens } from "@/lib/common/contracts/tokens";
+import { tokens } from "@/lib/common/contracts/tokens";
 
-type Props = {
-  token: TokenInfo | undefined;
-  setToken: (token: TokenInfo | undefined) => void;
-};
+import { useFormContext } from "../hooks/useFormContext";
+import { ActionType } from "../reducer/formReducer";
 
-const FromTokenSelection = ({ token, setToken }: Props) => {
+const FromTokenSelection = () => {
+  const { state, dispatch } = useFormContext();
+
   const handleTokenChange = (value: string) => {
     const token = Object.values(tokens).find((token) => token.symbol === value);
 
-    setToken(token);
+    dispatch({ type: ActionType.SET_FROM_TOKEN, payload: token });
   };
 
   return (
     <div className="flex flex-col gap-6">
       <Header type="h3">From</Header>
 
-      <Select value={token?.symbol} onValueChange={handleTokenChange}>
+      <Select value={state.fromToken?.symbol} onValueChange={handleTokenChange}>
         <SelectTrigger aria-label="from-token-select">
           <SelectValue placeholder="Select a token to sell" />
         </SelectTrigger>
