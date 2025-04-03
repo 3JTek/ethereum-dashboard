@@ -28,6 +28,7 @@ const QuoteResult = () => {
         dispatch({ type: ActionType.SET_QUOTE, payload: Number(query.data.estimatedAmount) });
       }
     },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     [query.isSuccess]
   );
 
