@@ -13,6 +13,9 @@ const Navbar = () => {
           <NavItem name="dashboard" href={"/"} />
         </div>
         <div className="flex items-center gap-9">
+          <NavItem name="ens utils" href={"/ens"} />
+        </div>
+        <div className="flex items-center gap-9">
           <NavItem name="swap" href={"/swap"} />
         </div>
         <div>
