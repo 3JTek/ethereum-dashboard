@@ -105,7 +105,6 @@ describe("Ens Component", () => {
       await userEvent.type(inputField, "not-a-valid-ens-name");
 
       const submitButton = screen.getByRole("button", { name: /Search/i });
-
       await userEvent.click(submitButton);
 
       expect(screen.getByText(/Invalid ENS name or Ethereum address/i)).toBeInTheDocument();
@@ -113,9 +112,14 @@ describe("Ens Component", () => {
       await userEvent.clear(inputField);
       await userEvent.type(inputField, "valid.eth");
 
+      await userEvent.click(submitButton);
+
       expect(screen.queryByText(/Invalid ENS name or Ethereum address/i)).not.toBeInTheDocument();
 
+      await userEvent.clear(inputField);
       await userEvent.type(inputField, "0x123445565-not-a-valid-wallet-address");
+
+      await userEvent.click(submitButton);
 
       expect(screen.getByText(/Invalid ENS name or Ethereum address/i)).toBeInTheDocument();
     });

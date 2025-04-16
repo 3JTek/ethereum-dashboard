@@ -65,6 +65,8 @@ const LookupForm = () => {
     initialValues: {
       searchInput: "",
     },
+    validateOnBlur: false,
+    validateOnChange: false,
     validate,
     onSubmit,
   });
@@ -75,7 +77,7 @@ const LookupForm = () => {
         <div className="space-y-2">
           <Label>Address or ENS</Label>
           <div className="flex gap-2">
-            <Input placeholder="0x... or name.eth" type="text" {...formik.getFieldProps("searchInput")} />
+            <Input autoFocus placeholder="0x... or name.eth" type="text" {...formik.getFieldProps("searchInput")} />
             <Button type="submit" disabled={mutation.isPending}>
               {mutation.isPending ? <Skeleton className="h-4 w-4 rounded-full" /> : <Search className="h-4 w-4" />}
               <span className="sr-only">Search</span>
@@ -84,7 +86,7 @@ const LookupForm = () => {
         </div>
       </form>
 
-      {((formik.touched.searchInput && formik.errors.searchInput) || mutation.isError) && (
+      {(formik.errors.searchInput || mutation.isError) && (
         <Alert variant="destructive" className="mt-4">
           <AlertTitle>Error</AlertTitle>
           <AlertDescription>{formik.errors.searchInput || mutation.isError}</AlertDescription>
