@@ -89,7 +89,7 @@ const LookupForm = () => {
       {(formik.errors.searchInput || mutation.isError) && (
         <Alert variant="destructive" className="mt-4">
           <AlertTitle>Error</AlertTitle>
-          <AlertDescription>{formik.errors.searchInput || mutation.isError}</AlertDescription>
+          <AlertDescription>{formik.errors.searchInput || "Could not process your request"}</AlertDescription>
         </Alert>
       )}
 
@@ -126,7 +126,7 @@ const LookupForm = () => {
 
           {!mutation.data && (
             <div data-testid="no-result" className="text-sm text-muted-foreground">
-              No ENS name found for this address
+              No ENS or Address that matches your search could be found.
             </div>
           )}
         </div>
