@@ -1,6 +1,6 @@
 import { ONE_INCH_API_KEY, ONE_INCH_BASE_URL } from "@/lib/common/config/environment";
 
-import backendAgent from "../backendAgent";
+import backendAgent from "../../utils/httpAgent";
 import { OneInchProtocol, OneInchTokenInfo } from "./types";
 
 type OneInchGetQuoteQueryParams = {

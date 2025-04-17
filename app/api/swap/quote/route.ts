@@ -1,7 +1,7 @@
 import oneInchApi from "@lib/server/api/one-inch";
 import { NextRequest, NextResponse } from "next/server";
 
-import { ApiError } from "@/lib/common/utils/Error";
+import { ApiError } from "@/lib/server/utils/Error";
 
 export async function GET(req: NextRequest): Promise<NextResponse<{ data: { dstAmount: string } } | { error: string }>> {
   try {

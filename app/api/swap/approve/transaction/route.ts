@@ -1,8 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
 
 import { TokenAddress } from "@/lib/common/contracts/tokens";
-import { ApiError } from "@/lib/common/utils/Error";
 import oneInchApi from "@/lib/server/api/one-inch";
+import { ApiError } from "@/lib/server/utils/Error";
 
 type Response = Promise<NextResponse<Awaited<ReturnType<typeof oneInchApi.getApproveTxData>> | { error: string }>>;
 

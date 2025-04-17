@@ -1,8 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
 
-import { ApiError } from "@/lib/common/utils/Error";
 import oneInchApi from "@/lib/server/api/one-inch";
 import { OneInchGetSwapDataResponse } from "@/lib/server/api/one-inch/getSwapData";
+import { ApiError } from "@/lib/server/utils/Error";
 
 export async function GET(req: NextRequest): Promise<NextResponse<{ data: OneInchGetSwapDataResponse } | { error: string }>> {
   try {

@@ -1,4 +1,4 @@
-import { ApiError, BadRequest, NotFound, UnAuthenticated, UnAuthorized, UnprocessableEntity } from "./Error";
+import { ApiError, BadRequest, NotFound, UnAuthenticated, UnAuthorized, UnprocessableEntity } from "../../server/utils/Error";
 
 type Method = "GET" | "POST" | "PUT" | "DELETE";
 
