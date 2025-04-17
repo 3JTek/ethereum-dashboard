@@ -1,13 +1,25 @@
 {
-  "name": "my-monorepo",
+  "name": "ethereum-dashboard",
   "private": true,
-  "devDependencies": {
-    "turbo": "^2.5.0"
+  "scripts": {
+    "build": "turbo run build",
+    "dev": "turbo run dev",
+    "lint": "turbo run lint",
+    "format": "prettier --write \"**/*.{ts,tsx,md}\"",
+    "test": "turbo run test",
+    "check-types": "turbo run check-types"
   },
+  "devDependencies": {
+    "prettier": "^3.5.3",
+    "turbo": "^2.4.4",
+    "typescript": "5.8.2"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "packageManager": "yarn@1.22.22",
   "workspaces": [
     "apps/*",
     "packages/*"
-  ],
-  "packageManager": "yarn@1.22.22",
-  "version": "0.0.0"
+  ]
 }

@@ -1,0 +1,24 @@
+{
+  "extends": "@repo/typescript-config/nextjs.json",
+  "compilerOptions": {
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ],
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./*"],
+      "@lib/*": ["./lib/*"],
+      "@client/*": ["./lib/client/*"],
+      "@features/*": ["lib/client/features/*"],
+      "@design-system/*": ["./lib/client/shared/components/shadcn-ui/*"],
+      "@custom-components/*": ["./lib/client/shared/components/custom/*"],
+      "@server/*": ["./lib/server/*"],
+      "@common/*": ["lib/common/*"]
+    }
+  },
+  "types": ["@testing-library/jest-dom", "vitest/globals"],
+  "include": ["**/*.ts", "**/*.tsx", "next-env.d.ts", "next.config.js", ".next/types/**/*.ts"],
+  "exclude": ["node_modules"]
+}
