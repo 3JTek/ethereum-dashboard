@@ -41,13 +41,14 @@
     "tailwind-merge": "^3.0.1",
     "tailwindcss-animate": "^1.0.7",
     "viem": "2.x",
+    "vitest": "^3.1.2",
     "wagmi": "^2.14.11"
   },
   "devDependencies": {
-    "@repo/eslint-config": "*",
-    "@repo/typescript-config": "*",
     "@eslint/eslintrc": "^3",
     "@faker-js/faker": "^9.5.0",
+    "@repo/eslint-config": "*",
+    "@repo/typescript-config": "*",
     "@testing-library/jest-dom": "^6.6.3",
     "@testing-library/react": "^14.2.0",
     "@testing-library/user-event": "^14.6.1",
